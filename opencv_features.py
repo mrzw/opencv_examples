@@ -2,6 +2,7 @@
 # opencv提取特征
 import numpy as np
 import cv2
+import matplotlib.pyplot as plt
 
 def sift_desc(rgb_name, rectangle=None):    # rectangle=[x1,y1,x2,y2]
     img = cv2.imread(rgb_name, 0)
