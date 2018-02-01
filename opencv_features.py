@@ -14,19 +14,29 @@ def sift_desc(rgb_name, rectangle=None):    # rectangle=[x1,y1,x2,y2]
     else:
         kp, desc = sift.detectAndCompute(img, None)
     return kp, desc   # kp: 关键点 desc: 特征描述子
-#################sift使用########################
+#################sift使用#############################################################
 # kp1, desc1 = sift_desc(rgb1)
 # kp_img = cv2.drawKeypoints(img1, kp, None)
 # plt.imshow(kp_img)
 # kp2, desc2 = sift_desc(rgb2)
+###########根据distance挑选匹配点##################
 # bf = cv2.BFMatcher()
 # matches = bf.match(desc1, desc2)
 # matches = sorted(matches, key=lambda x:x.distance)
 # img3 = cv2.drawMatches(img1, kp1, img2, kp2, matches[:10], None)
+################################################
+##########根据匹配的第一优先点的distance小于第二优先点的一半挑选匹配点##########
+# bf = cv2.BFMatcher()
+# matches = bf.knnMatch(desc1, desc2, k=2)
+# goodMatch = []
+# for m, n in matches:
+#     if m.distance < 0.50 * n.distance:
+#         goodMatch.append([m])
+# img3 = cv2.drawMatchesKnn(img1,kp1,img2,kp2,goodMatch,None)
+#######################################################################
 # plt.imshow(img3)
 # plt.show()
-################################################
-
+####################################################################################
 # corr = abs(cv2.compareHist(hist1, hist2, cv2.HISTCMP_CORREL)) 求相关性
 # mask部分可参照sift_desc
 def calcHist_rgb(image_name, mask=None):
