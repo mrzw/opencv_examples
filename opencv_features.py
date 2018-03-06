@@ -20,11 +20,19 @@ def sift_desc(rgb_name, rectangle=None):    # rectangle=[x1,y1,x2,y2]
 # plt.imshow(kp_img)
 # kp2, desc2 = sift_desc(rgb2)
 ###########根据distance挑选匹配点##################
+# https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_feature2d/py_matcher/py_matcher.html
+############Brute-Force#########################
 # bf = cv2.BFMatcher()
 # matches = bf.match(desc1, desc2)
 # matches = sorted(matches, key=lambda x:x.distance)
 # img3 = cv2.drawMatches(img1, kp1, img2, kp2, matches[:10], None)
 ################################################
+##############FLANN#############################
+# FLANN_INDEX_KDTREE = 0
+# index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
+# search_params = dict(checks=50)
+# flann = cv2.FlannBasedMatcher(index_params,search_params)
+# matches = flann.knnMatch(des1,des2,k=2)
 ##########根据匹配的第一优先点的distance小于第二优先点的一半挑选匹配点##########
 # bf = cv2.BFMatcher()
 # matches = bf.knnMatch(desc1, desc2, k=2)
