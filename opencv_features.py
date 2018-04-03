@@ -33,6 +33,11 @@ def sift_desc(rgb_name, rectangle=None):    # rectangle=[x1,y1,x2,y2]
 # search_params = dict(checks=50)
 # flann = cv2.FlannBasedMatcher(index_params,search_params)
 # matches = flann.knnMatch(des1,des2,k=2)  # 单一训练样本 1v1
+#goodMatch = []
+#for m, n in matches:
+#    if m.distance < 0.5 * n.distance:
+#        goodMatch.append([m])
+
 
 # flann.add([desc2])
 # flann.add([desc3])
